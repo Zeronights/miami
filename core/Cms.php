@@ -14,6 +14,11 @@ class Cms {
 		return $config->get('options')->app;
 	}
 	
+	public $session = false;
+	public function __construct() {
+		$this->session = Session::get_instance();
+	}
+	
 	public function uri($uri = null) {
 		$app = static::get_current_app() == static::get_app()
 			? '/'
@@ -31,5 +36,13 @@ class Cms {
 	
 	public function nav($nav) {
 		return $nav;
+	}
+	
+	public function sg($key, $default = null) {
+		return $this->session->get($key, $default);
+	}
+	
+	public function sgf($key, $default = null) {
+		return $this->session->get_flash($key, $default);
 	}
 }
