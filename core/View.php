@@ -2,7 +2,7 @@
 
 namespace Miami\Core;
 
-class View {
+class View extends Cms {
 	
 	protected $view;
 	protected $values = array();
