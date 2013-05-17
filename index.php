@@ -13,6 +13,10 @@ use Miami\Core\Load;
 $load = Load::get_instance();
 
 spl_autoload_register(array($load, 'autoload'));
+$load->register('Apps\Admin', 'admin');
+$load->register('Miami', '');
+
+new \Apps\Admin\Controller\Login();
 
 
 // Register namespaces
