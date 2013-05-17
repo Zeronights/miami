@@ -25,7 +25,6 @@ class Load extends Singleton {
 	}
 	
 	public function autoload($class) {
-		
 		$path = $this->resolve($class);
 		require_once $path;
 	}
@@ -39,7 +38,8 @@ class Load extends Singleton {
 		$options = $options + array(
 			'underscore' => true,
 			'register' => true,
-			'file' => false
+			'file' => false,
+			'ext' => '.php'
 		);
 		$options = (object) $options;
 		
@@ -79,6 +79,6 @@ class Load extends Singleton {
 		
 		$folders = strtolower($folders);
 		
-		return DIR_ROOT . $folders . $file;
+		return DIR_ROOT . $folders . DIRECTORY_SEPARATOR . $file . $options->ext;
 	}
 }
