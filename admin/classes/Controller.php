@@ -23,13 +23,8 @@ class Controller extends \Miami\Core\Controller {
 		$this->auth->set_salt($conf_options->auth->salt);
 		$this->route = \Miami\Core\Route::get_instance();
 		
-		$this->database = new \Miami\Core\Database(array(
-			'driver' => $conf_database->driver,
-			'host' => $conf_database->host,
-			'port' => $conf_database->port,
-			'username' => $conf_database->username,
-			'password' => $conf_database->password,
-			'database' => $conf_database->database
-		));
+		
+		// Accepts objects or convert array to object
+		$this->database = new \Miami\Core\Database($conf_database);
 	}
 }

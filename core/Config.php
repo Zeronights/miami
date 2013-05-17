@@ -11,7 +11,7 @@ class Config extends Singleton {
 			return $this->configs[$config];
 		}
 		$load = Load::get_instance();
-		$config_path = $load->path('\App\Config\\' . $config);
+		$config_path = $load->path('\App\\' . Cms::get_current_app() . '\Config\\' . $config);
 		return $this->configs[$config] = (object) (include $config_path);
 	}
 	

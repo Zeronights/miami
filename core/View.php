@@ -102,7 +102,7 @@ class View extends Cms {
 		}
 		if ($this->view) {
 			$load = Load::get_instance();
-			include $load->path('Apps' . Cms::get_current_app() . '/view/' . $this->view . '.php');
+			include $load->path('Apps/' . Cms::get_current_app() . '/view/' . $this->view);
 		}
 		echo implode('', $templates[self::TPL_POST]);
 		
