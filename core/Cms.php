@@ -30,6 +30,10 @@ class Cms {
 		return '/' . static::get_current_app() . '/www/' . $uri;
 	}
 	
+	public function asset($uri = null) {
+		return $this->base($uri);
+	}
+	
 	public function text($text) {
 		return $text;
 	}

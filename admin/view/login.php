@@ -10,9 +10,9 @@
 <body>
 	<div id="login">
 		<form method="post">
-			<?php if ($this->sgf('login.error')): ?>
+<?php if ($this->sgf('login.error')): ?>
 			<p class="error"><?=$this->sgf('login.error')?></p>
-			<?php endif; ?>
+<?php endif; ?>
 			<div class="inline">
 				<label>Username:</label>
 				<input type="text" name="login_username" />

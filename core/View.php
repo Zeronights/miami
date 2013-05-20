@@ -14,6 +14,7 @@ class View extends Cms {
 	const TPL_POST = 4;
 	
 	public function __construct($view = null) {
+		parent::__construct();
 		$this->view = $view;
 		return $this;
 	}

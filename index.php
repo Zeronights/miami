@@ -44,7 +44,6 @@ $config->load('database', array(
 ));
 
 
-var_dump('Sort out load and register namespace.');
 $login = new \Apps\Admin\Controller\Login();
 echo($login->action_index()->render());
 
