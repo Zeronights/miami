@@ -42,9 +42,7 @@ class Load extends Singleton {
 			'ext' => '.php'
 		);
 		$options = (object) $options;
-		
 		$dir_regex = '/[\/\\\]+/';
-				
 		$path = preg_replace($dir_regex, DIRECTORY_SEPARATOR, $path);
 		
 		if ($options->file) {
@@ -52,9 +50,11 @@ class Load extends Singleton {
 		}
 		
 		if ($options->register) {
+			$path = ltrim($path, DIRECTORY_SEPARATOR);
 			foreach ($this->registered_classes as $class => $class_path) {
 				$class = preg_replace($dir_regex, DIRECTORY_SEPARATOR, $class);
-				if (strpos($path, $class . DIRECTORY_SEPARATOR) === 0) {
+				
+				if (stripos($path, $class) === 0) {
 
 					$path = $class_path . substr($path, strlen($class));
 					$path = preg_replace($dir_regex, DIRECTORY_SEPARATOR, $path);
@@ -67,18 +67,15 @@ class Load extends Singleton {
 		$file = basename($path);
 		
 		if ($options->underscore) {
-			
 			$pos = strrpos($file, '_');
 			
-			if ($pos !== false) {
-				
-				$folders .=  DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, substr($file, 0, $pos + 1));
+			if ($pos !== false) {				
+				$folders .=  DIRECTORY_SEPARATOR . str_replace('_', DIRECTORY_SEPARATOR, substr($file, 0, $pos));
 				$file = substr($file, $pos + 1);
 			}
 		}
 		
 		$folders = strtolower($folders);
-		
 		return DIR_ROOT . $folders . DIRECTORY_SEPARATOR . $file . $options->ext;
 	}
 }
