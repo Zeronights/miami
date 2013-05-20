@@ -35,6 +35,9 @@ class Load extends Singleton {
 	
 	protected function resolve($path, array $options = array()) {
 			
+		#var_dump('Path: ' . $path);
+		#var_dump('DIR_ROOT: ' . DIR_ROOT);
+		
 		$options = $options + array(
 			'underscore' => true,
 			'register' => true,
@@ -54,8 +57,10 @@ class Load extends Singleton {
 			foreach ($this->registered_classes as $class => $class_path) {
 				$class = preg_replace($dir_regex, DIRECTORY_SEPARATOR, $class);
 				
+				#var_dump('Matching:', $path, $class);
+				
 				if (stripos($path, $class) === 0) {
-
+				
 					$path = $class_path . substr($path, strlen($class));
 					$path = preg_replace($dir_regex, DIRECTORY_SEPARATOR, $path);
 					break;

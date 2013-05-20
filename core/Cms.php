@@ -11,7 +11,7 @@ class Cms {
 	
 	public static function get_app() {
 		$config = Config::get_instance();
-		return $config->get('options')->app;
+		return $config->get('options')->default_app;
 	}
 	
 	public $session = false;
