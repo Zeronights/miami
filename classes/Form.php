@@ -68,7 +68,7 @@ class Form {
 					'required' => $options['required']
 				));
 			}
-			$callback((object) $field_objects);
+			return $callback((object) $field_objects);
 		}
 	}
 }
