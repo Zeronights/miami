@@ -2,11 +2,14 @@
 
 namespace Miami\Core;
 
+/**
+ * @todo Smart loading via construct
+ */
 class IoC {
 	
-	protected $containers = array();
+	protected static $containers = array();
 	
-	public static function register($name, $callback) {
+	public static function register($name, \Closure $callback = null) {
 		static::$containers[$name] = (object) array(
 			'callback' => $callback,
 			'object' => null,
@@ -14,24 +17,26 @@ class IoC {
 		);
 	}
 	
-	public static function singleton($name, $callback) {
-		static::$containers[$name] = (object) array(
-			'callback' => $callback,
-			'object' => null,
-			'singleton' => true
-		);
+	public static function singleton($name, \Closure $callback = null) {
+		static::register($name, $callback);
+		static::$containers[$name]->singleton = true;
 	}
 	
 	public static function resolve($name) {
 		if (!isset(static::$containers[$name])) {
+			// Throw exception
 			return;
 		}
 		if (is_object(static::$containers[$name]->object)
 			&& static::$containers[$name]->singleton) {
 			return static::$containers[$name]->object;
 		}
-		$callback = static::$containers[$name]->callback;
-		static::$containers[$name]->object = $callback();		
+		if (is_callable(static::$containers[$name]->callback)) {
+			$callback = static::$containers[$name]->callback;
+			static::$containers[$name]->object = $callback();		
+		} else {
+			static::$containers[$name]->object = new $name();
+		}
 		return static::$containers[$name]->object;
 	}
 }
